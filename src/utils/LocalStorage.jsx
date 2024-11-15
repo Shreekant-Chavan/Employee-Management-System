@@ -9,9 +9,9 @@ const employees = [
         title: "Design Homepage",
         description: "Create a responsive design for the homepage.",
         date: "2023-10-29",
-        category: "Design",
+        priority: "High",
         active: true,
-        newTask: true,
+        newTask: false,
         completedTask: false,
         failedTask: false,
       },
@@ -19,7 +19,7 @@ const employees = [
         title: "Fix Navbar Bug",
         description: "Resolve dropdown issue on mobile view.",
         date: "2023-10-25",
-        category: "Bug Fix",
+        priority: "Medium",
         active: false,
         newTask: false,
         completedTask: true,
@@ -29,7 +29,7 @@ const employees = [
         title: "Write Blog Post",
         description: "Draft a blog post on latest tech trends.",
         date: "2023-10-20",
-        category: "Writing",
+        priority: "Low",
         active: false,
         newTask: false,
         completedTask: false,
@@ -38,7 +38,7 @@ const employees = [
     ],
     taskSummary: {
       active: 1,
-      newTask: 1,
+      newTask: 0,
       completedTask: 1,
       failedTask: 1,
     },
@@ -53,7 +53,7 @@ const employees = [
         title: "Research User Personas",
         description: "Conduct research on target user personas.",
         date: "2023-10-18",
-        category: "Research",
+        priority: "Low",
         active: false,
         newTask: true,
         completedTask: false,
@@ -63,7 +63,7 @@ const employees = [
         title: "Update Documentation",
         description: "Update internal project documentation.",
         date: "2023-10-21",
-        category: "Documentation",
+        priority: "Medium",
         active: true,
         newTask: false,
         completedTask: false,
@@ -87,7 +87,7 @@ const employees = [
         title: "SEO Audit",
         description: "Audit site for SEO improvements.",
         date: "2023-10-15",
-        category: "SEO",
+        priority: "Medium",
         active: false,
         newTask: true,
         completedTask: false,
@@ -97,7 +97,7 @@ const employees = [
         title: "Develop Footer Section",
         description: "Add a footer section with social links.",
         date: "2023-10-22",
-        category: "Development",
+        priority: "High",
         active: true,
         newTask: false,
         completedTask: false,
@@ -121,7 +121,7 @@ const employees = [
         title: "Test Login Page",
         description: "Perform testing on the login page.",
         date: "2023-10-18",
-        category: "Testing",
+        priority: "Medium",
         active: true,
         newTask: false,
         completedTask: false,
@@ -131,7 +131,7 @@ const employees = [
         title: "Create Feature Request",
         description: "Add user feature request board.",
         date: "2023-10-20",
-        category: "User Experience",
+        priority: "Medium",
         active: false,
         newTask: true,
         completedTask: false,
@@ -155,7 +155,7 @@ const employees = [
         title: "Email Campaign",
         description: "Prepare emails for new product launch.",
         date: "2023-10-25",
-        category: "Marketing",
+        priority: "Low",
         active: false,
         newTask: false,
         completedTask: false,
@@ -165,16 +165,16 @@ const employees = [
         title: "Fix CSS Issues",
         description: "Resolve responsive design issues.",
         date: "2023-10-24",
-        category: "Bug Fix",
+        priority: "Medium",
         active: true,
-        newTask: true,
+        newTask: false,
         completedTask: false,
         failedTask: false,
       },
     ],
     taskSummary: {
       active: 1,
-      newTask: 1,
+      newTask: 0,
       completedTask: 0,
       failedTask: 1,
     },
@@ -189,7 +189,7 @@ const employees = [
         title: "Analyze Sales Data",
         description: "Review sales data for last quarter.",
         date: "2023-10-22",
-        category: "Data Analysis",
+        priority: "High",
         active: false,
         newTask: true,
         completedTask: false,
@@ -199,7 +199,7 @@ const employees = [
         title: "Redesign Profile Page",
         description: "Update layout of user profile page.",
         date: "2023-10-27",
-        category: "UI Design",
+        priority: "Medium",
         active: true,
         newTask: false,
         completedTask: false,
@@ -223,9 +223,9 @@ const employees = [
         title: "Implement Dark Mode",
         description: "Add dark mode support to app.",
         date: "2023-10-30",
-        category: "Development",
+        priority: "High",
         active: true,
-        newTask: true,
+        newTask: false,
         completedTask: false,
         failedTask: false,
       },
@@ -233,7 +233,7 @@ const employees = [
         title: "Content Review",
         description: "Review all site content for accuracy.",
         date: "2023-10-17",
-        category: "Review",
+        priority: "Low",
         active: false,
         newTask: false,
         completedTask: true,
@@ -242,7 +242,7 @@ const employees = [
     ],
     taskSummary: {
       active: 1,
-      newTask: 1,
+      newTask: 0,
       completedTask: 1,
       failedTask: 0,
     },
@@ -257,7 +257,7 @@ const employees = [
         title: "Create Database Schema",
         description: "Design schema for new feature.",
         date: "2023-10-26",
-        category: "Database",
+        priority: "High",
         active: true,
         newTask: false,
         completedTask: false,
@@ -267,7 +267,7 @@ const employees = [
         title: "Design Login Flow",
         description: "Improve user experience in login process.",
         date: "2023-10-20",
-        category: "User Experience",
+        priority: "Low",
         active: false,
         newTask: true,
         completedTask: false,
@@ -286,6 +286,7 @@ const employees = [
 const admin = [
   {
     id: 1,
+    firstName: "Shreekant",
     email: "admin@me.com",
     password: "123",
   },
@@ -297,6 +298,19 @@ export const setLocalStorage = () => {
   localStorage.setItem("employees", JSON.stringify(employees));
   localStorage.setItem("admin", JSON.stringify(admin));
 };
+
+
+// export const setLocalStorage = () => {
+//   if (!localStorage.getItem("employees")) {
+//     localStorage.setItem("employees", JSON.stringify(employees));
+//   }
+//   if (!localStorage.getItem("admin")) {
+//     localStorage.setItem("admin", JSON.stringify(admin));
+//   }
+// };
+
+
+
 
 export const getLocalStorage = () => {
   const employees = JSON.parse(localStorage.getItem("employees"));

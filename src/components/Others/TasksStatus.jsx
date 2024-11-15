@@ -1,6 +1,12 @@
 import React from "react";
 
 function TasksStatus({ data }) {
+  console.log(data);
+
+  // if (!data || !data.taskSummary) {
+  //   return <div>No task summary available</div>; // Show a fallback UI
+  // }
+
   return (
     <div className="flex mt-10 justify-between gap-5">
       <div className="rounded-xl w-[45%] px-9 py-6 bg-blue-500">

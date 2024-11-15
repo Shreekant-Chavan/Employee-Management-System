@@ -1,81 +1,44 @@
 import React from "react";
+import AcceptTask from "./AcceptTask";
+import CompleteTask from "./CompleteTask";
+import NewTask from "./NewTask";
+import FailedTask from "./FailedTask";
+import { getLocalStorage } from "../../utils/LocalStorage";
 
 function TaskLists({ data }) {
+  console.log(data);
+
+  // if (!data || !data.tasks) {
+  //   return <div>No tasks available</div>; // Show a fallback UI
+  // }
+
+  // const EmployeePage = () => {
+  //   const {employees} = getLocalStorage()
+  //   const currentEmloyee = employees.find((elem) => {
+  //     return <h2>No employee Found</h2>
+  //   })
+  // }
+
   return (
     <div
       id="tasklist"
       className="flex flex-nowrap items-center justify-start gap-5 h-[55%] w-full py-5 overflow-x-auto mt-10"
     >
-      <div className="h-full flex-shrink-0 w-[318px] p-5 bg-red-500 rounded-xl">
-        <div className="flex justify-between items-center">
-          <h3 className="bg-red-700 px-3 py-1 text-sm rounded-lg font-semibold">
-            High
-          </h3>
-          <h4 className="text-sm">11-11-2024</h4>
-        </div>
-        <h2 className="mt-4 text-2xl font-bold">Make Portfolio Web</h2>
-        <p className="text-sm mt-3">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure magnam,
-          error dolores beatae iusto veniam! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Beatae, illo.
-        </p>
-      </div>
-      <div className="h-full flex-shrink-0 w-[318px] p-5 bg-green-500 rounded-xl">
-        <div className="flex justify-between items-center">
-          <h3 className="bg-red-700 px-3 py-1 text-sm rounded-lg font-semibold">
-            High
-          </h3>
-          <h4 className="text-sm">11-11-2024</h4>
-        </div>
-        <h2 className="mt-4 text-2xl font-bold">Make Portfolio Web</h2>
-        <p className="text-sm mt-3">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure magnam,
-          error dolores beatae iusto veniam! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Beatae, illo.
-        </p>
-      </div>
-      <div className="h-full flex-shrink-0 w-[318px] p-5 bg-yellow-500 rounded-xl">
-        <div className="flex justify-between items-center">
-          <h3 className="bg-red-700 px-3 py-1 text-sm rounded-lg font-semibold">
-            High
-          </h3>
-          <h4 className="text-sm">11-11-2024</h4>
-        </div>
-        <h2 className="mt-4 text-2xl font-bold">Make Portfolio Web</h2>
-        <p className="text-sm mt-3">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure magnam,
-          error dolores beatae iusto veniam! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Beatae, illo.
-        </p>
-      </div>
-      <div className="h-full flex-shrink-0 w-[318px] p-5 bg-blue-500 rounded-xl">
-        <div className="flex justify-between items-center">
-          <h3 className="bg-red-700 px-3 py-1 text-sm rounded-lg font-semibold">
-            High
-          </h3>
-          <h4 className="text-sm">11-11-2024</h4>
-        </div>
-        <h2 className="mt-4 text-2xl font-bold">Make Portfolio Web</h2>
-        <p className="text-sm mt-3">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure magnam,
-          error dolores beatae iusto veniam! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Beatae, illo.
-        </p>
-      </div>
-      <div className="h-full flex-shrink-0 w-[318px] p-5 bg-purple-500 rounded-xl">
-        <div className="flex justify-between items-center">
-          <h3 className="bg-red-700 px-3 py-1 text-sm rounded-lg font-semibold">
-            High
-          </h3>
-          <h4 className="text-sm">11-11-2024</h4>
-        </div>
-        <h2 className="mt-4 text-2xl font-bold">Make Portfolio Web</h2>
-        <p className="text-sm mt-3">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure magnam,
-          error dolores beatae iusto veniam! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Beatae, illo.
-        </p>
-      </div>
+      {data.tasks.map((event, idx) => {
+        if (event.active) {
+          return <AcceptTask key={idx} data={event} />;
+        }
+        if (event.completedTask) {
+          return <CompleteTask key={idx} data={event} />;
+        }
+        if (event.failedTask) {
+          return <FailedTask key={idx} data={event} />;
+        }
+        if (event.newTask) {
+          return <NewTask key={idx} data={event} />;
+        }
+        return null;
+      })}
     </div>
   );
 }
