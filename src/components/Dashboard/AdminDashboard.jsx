@@ -6,7 +6,7 @@ import AllTasks from "../Others/AllTasks";
 function AdminDashboard() {
   return (
     <div className="h-screen w-full p-7">
-      <Header />
+      {/* <Header /> */}
       <CreateTask />
       <AllTasks />
     </div>

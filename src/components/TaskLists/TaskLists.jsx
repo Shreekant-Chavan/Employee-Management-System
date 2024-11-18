@@ -8,9 +8,9 @@ import { getLocalStorage } from "../../utils/LocalStorage";
 function TaskLists({ data }) {
   console.log(data);
 
-  // if (!data || !data.tasks) {
-  //   return <div>No tasks available</div>; // Show a fallback UI
-  // }
+  if (!data || !data.tasks) {
+    return <div>No tasks available</div>;
+  }
 
   // const EmployeePage = () => {
   //   const {employees} = getLocalStorage()
