@@ -24,18 +24,18 @@ function TaskLists({ data }) {
       id="tasklist"
       className="flex flex-nowrap items-center justify-start gap-5 h-[55%] w-full py-5 overflow-x-auto mt-10"
     >
-      {data.tasks.map((event, idx) => {
-        if (event.active) {
-          return <AcceptTask key={idx} data={event} />;
+      {data.tasks.map((task, idx) => {
+        if (task.active) {
+          return <AcceptTask key={idx} data={task} />;
         }
-        if (event.completedTask) {
-          return <CompleteTask key={idx} data={event} />;
+        if (task.completedTask) {
+          return <CompleteTask key={idx} data={task} />;
         }
-        if (event.failedTask) {
-          return <FailedTask key={idx} data={event} />;
+        if (task.failedTask) {
+          return <FailedTask key={idx} data={task} />;
         }
-        if (event.newTask) {
-          return <NewTask key={idx} data={event} />;
+        if (task.newTask) {
+          return <NewTask key={idx} data={task} />;
         }
         return null;
       })}

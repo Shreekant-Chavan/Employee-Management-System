@@ -155,12 +155,10 @@ function App() {
 
   return (
     <>
-      {user && <Header data={loggedInUserData} onLogout={logoutHandler}/>}
+      {user && <Header data={loggedInUserData} onLogout={logoutHandler} />}
       {!user && <Login handleLogin={loginHandler} />}
-      {user == "admin" && (
-        <AdminDashboard />
-      )}
-      {user == "employee" && (<EmployeeDashboard data={loggedInUserData} />)}
+      {user == "admin" && <AdminDashboard />}
+      {user == "employee" && <EmployeeDashboard data={loggedInUserData} />}
     </>
   );
 }
