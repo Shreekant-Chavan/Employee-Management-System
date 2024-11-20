@@ -7,37 +7,90 @@ function CreateTask() {
   const [taskAssign, setTaskAssign] = useState("");
   const [taskCategory, setTaskCategory] = useState("");
 
+  const assignTaskToEmployee = (task, employeeName) => {
+    const employees = JSON.parse(localStorage.getItem("employees")) || [];
+    // console.log(employees);
+    console.log(
+      "Assigned Employee Data:",
+      employees.find((emp) => emp.firstName === taskAssign)
+    );
+
+    const updatedEmployees = employees.map((employee) => {
+      if (employee.firstName == employeeName) {
+        employee.tasks = employee.tasks || [];
+        employee.taskSummary = employee.taskSummary || {
+          newTask: 0,
+          active: 0,
+          completedTask: 0,
+          failedTask: 0,
+        };
+        employee.tasks.push(task);
+
+        // if (!employee.tasks) {
+        //   employee.tasks = [];
+        // }
+        // employee.tasks.push(task);
+        // console.log(employee.tasks);
+
+        // if (!employee.taskSummary) {
+        //   employee.taskSummary = {
+        //     newTask: 0,
+        //     active: 0,
+        //     completedTask: 0,
+        //     failedTask: 0,
+        //   };
+        // }
+        employee.taskSummary.newTask += 1;
+        // employee.taskSummary.newTask =
+        //   (employee.taskSummary.newTask || 0) + 1;
+      }
+
+      return employee;
+    });
+    localStorage.setItem("employees", JSON.stringify(updatedEmployees));
+
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (loggedInUser?.data.email == employeeName) {
+      const updatedEmployee = updatedEmployees.find(
+        (employee) => employee.email == employeeName
+      );
+
+      localStorage.setItem(
+        "loggedInUser",
+        JSON.stringify({ ...loggedInUser, data: updatedEmployee })
+      );
+    }
+
+    window.dispatchEvent(new Event("storage"));
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
 
-    // const task = {
-    //   taskTitle,
-    //   taskDate,
-    //   taskAssign,
-    //   taskCategory,
-    //   taskDescription,
-    //   newTask: true,
-    //   active: false,
-    //   completedTask: false,
-    //   failedTask: false,
-    // };
+    if (
+      !taskTitle ||
+      !taskDate ||
+      !taskAssign ||
+      !taskCategory ||
+      !taskDescription
+    ) {
+      alert("All fields are required!");
+      return;
+    }
 
-    const assignTaskToEmployee = (task, employeeName) => {
-      const employees = JSON.parse(localStorage.getItem("employees")) || [];
-
-      const updatedEmployees = employees.map((employee) => {
-        if (employee.firstName == employeeName) {
-          employee.tasks.push(task);
-          console.log(employee.tasks);
-
-          employee.taskSummary.newTask =
-            (employee.taskSummary.newTask || 0) + 1;
-        }
-
-        return employee;
-      });
-      localStorage.setItem("employees", JSON.stringify(updatedEmployees));
+    const task = {
+      taskTitle,
+      taskDescription,
+      taskDate,
+      taskCategory,
+      taskAssign,
+      newTask: true,
+      active: false,
+      completedTask: false,
+      failedTask: false,
     };
+
+    assignTaskToEmployee(task, taskAssign);
 
     // const data = JSON.parse(localStorage.getItem("employees"))
     // console.log(data);

@@ -15,18 +15,36 @@ function EmployeeDashboard({ data }) {
   });
 
   useEffect(() => {
-    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    if (loggedInUser?.data) {
-      const updatedEmployees =
-        JSON.parse(localStorage.getItem("employees")) || [];
-      const newUpdatedEmployee = updatedEmployees.find(
-        (employee) => employee.email == loggedInUser.data.email
-      );
-      if (newUpdatedEmployee) {
-        setTasks(newUpdatedEmployee.tasks);
+    const syncTasksWithStorage = () => {
+      const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+      if (loggedInUser?.data) {
+        setTasks(loggedInUser.data.tasks || []);
+        // const updatedEmployees =
+        //   JSON.parse(localStorage.getItem("employees")) || [];
+        // const newUpdatedEmployee = updatedEmployees.find(
+        //   (employee) => employee.email == loggedInUser.data.email
+        // );
+        // if (newUpdatedEmployee) {
+        //   setTasks(newUpdatedEmployee.tasks || []);
+        // }
       }
-    }
+    };
+
+    window.addEventListener("storage", syncTasksWithStorage);
+
+    syncTasksWithStorage();
+
+    return () => {
+      window.removeEventListener("storage", syncTasksWithStorage);
+    };
   }, []);
+
+
+  useEffect(() => {
+    if (data?.tasks) {
+      setTasks(data.tasks)
+    }
+  }, [data])
 
   useEffect(() => {
     const active = tasks.filter((task) => task.active).length;
